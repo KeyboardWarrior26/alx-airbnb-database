@@ -22,3 +22,14 @@ This query uses a non-correlated subquery to calculate the average rating of eac
 ### 2. Users with More Than 3 Bookings
 
 This is a correlated subquery that counts bookings per user and filters users with more than three bookings.
+
+
+## Aggregations and Window Functions
+
+### 1. Total Bookings by User
+
+This query uses the `COUNT` function and `GROUP BY` to calculate the number of bookings each user has made. Users with zero bookings are also included via a `LEFT JOIN`.
+
+### 2. Ranking Properties by Booking Count
+
+This query uses a `ROW_NUMBER` window function to rank properties based on the number of bookings they’ve received. It helps identify the most popular listings.
