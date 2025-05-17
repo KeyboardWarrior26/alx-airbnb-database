@@ -13,10 +13,11 @@ SELECT
 FROM Booking
 JOIN User ON Booking.user_id = User.id
 JOIN Property ON Booking.property_id = Property.id
-JOIN Payment ON Booking.id = Payment.booking_id;
+JOIN Payment ON Booking.id = Payment.booking_id
+WHERE Payment.status = 'Completed' AND Booking.created_at > '2023-01-01';
 
 -- Optimized query
--- Let's assume not all columns are needed, and LEFT JOIN used in case some payments aren't made yet
+-- Reduced columns, LEFT JOIN in case payment missing, same WHERE condition
 EXPLAIN ANALYZE
 SELECT 
     B.id AS booking_id,
@@ -28,4 +29,6 @@ SELECT
 FROM Booking B
 JOIN User U ON B.user_id = U.id
 JOIN Property P ON B.property_id = P.id
-LEFT JOIN Payment PM ON B.id = PM.booking_id;
+LEFT JOIN Payment PM ON B.id = PM.booking_id
+WHERE PM.status = 'Completed' AND B.created_at > '2023-01-01';
+
